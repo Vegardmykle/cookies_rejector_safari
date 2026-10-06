@@ -1,11 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="nb">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cookie Rejecter</title>
     <link rel="stylesheet" href="popup.css">
     <script type="module" src="popup.js"></script>
 </head>
 <body>
-    <strong>Hello World!</strong>
+    <header class="top">
+        <div class="brand">
+            <svg class="logo" viewBox="0 0 32 32" aria-hidden="true">
+                <rect width="32" height="32" rx="8" class="logo-bg"/>
+                <path class="logo-cookie" d="M16 6.5a9.5 9.5 0 1 0 9.4 10.9 3.2 3.2 0 0 1-3.9-3.2 3.2 3.2 0 0 1-3.5-4.2A3.3 3.3 0 0 1 16 6.5Z"/>
+                <circle cx="12.4" cy="13.2" r="1.3" class="logo-chip"/>
+                <circle cx="17.6" cy="19.6" r="1.4" class="logo-chip"/>
+                <circle cx="11.8" cy="19.4" r="1.1" class="logo-chip"/>
+                <circle cx="21.6" cy="22.2" r="5.4" class="logo-badge"/>
+                <path d="m19.3 22.2 1.6 1.6 3.1-3.2" class="logo-check"/>
+            </svg>
+            <div>
+                <h1>Cookie Rejecter</h1>
+                <p class="tagline">Kun nødvendige cookies</p>
+            </div>
+        </div>
+        <label class="switch" title="Slå Cookie Rejecter av/på overalt">
+            <input type="checkbox" id="global-toggle" aria-label="Slå Cookie Rejecter av eller på overalt">
+            <span class="track"><span class="thumb"></span></span>
+        </label>
+    </header>
+
+    <main>
+        <section class="site-card" id="site-card" data-state="loading">
+            <div class="site-host" id="site-host">—</div>
+            <div class="status">
+                <div class="status-icon" aria-hidden="true">
+                    <svg class="i-ok" viewBox="0 0 24 24"><path d="M12 2.8 4.5 5.6v5.6c0 4.6 3.1 8.8 7.5 10 4.4-1.2 7.5-5.4 7.5-10V5.6L12 2.8Z"/><path class="stroke" d="m8.6 12.1 2.4 2.4 4.5-4.6"/></svg>
+                    <svg class="i-idle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2"/><path class="stroke" d="M12 7.8v4.4l2.8 1.7"/></svg>
+                    <svg class="i-pause" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2"/><path class="stroke" d="M10 9v6M14 9v6"/></svg>
+                    <svg class="i-off" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2"/><path class="stroke" d="m8.8 8.8 6.4 6.4"/></svg>
+                </div>
+                <div class="status-text">
+                    <h2 id="status-title">Laster …</h2>
+                    <p id="status-detail"></p>
+                </div>
+            </div>
+
+            <div class="row" id="site-row">
+                <span>Aktiv på <strong id="site-name">denne siden</strong></span>
+                <label class="switch small">
+                    <input type="checkbox" id="site-toggle" aria-label="Aktiv på denne siden">
+                    <span class="track"><span class="thumb"></span></span>
+                </label>
+            </div>
+
+            <div class="actions" id="actions">
+                <button id="rerun" class="btn">Avvis nå</button>
+                <button id="reload" class="btn primary" hidden>Last inn siden på nytt</button>
+            </div>
+        </section>
+
+        <section class="stats" aria-label="Statistikk">
+            <div class="tile"><span class="num" id="stat-banners">0</span><span class="lbl">bannere avvist</span></div>
+            <div class="tile"><span class="num" id="stat-clicks">0</span><span class="lbl">klikk spart</span></div>
+            <div class="tile"><span class="num" id="stat-time">0 s</span><span class="lbl">tid spart</span></div>
+        </section>
+
+        <section class="recent" id="recent-section">
+            <h3>Nylig avvist</h3>
+            <ul id="recent"></ul>
+            <p class="empty" id="recent-empty">Ingenting ennå – besøk en side med cookie-banner.</p>
+        </section>
+    </main>
+
+    <footer>
+        <span>Nødvendige cookies tillates alltid.</span>
+        <button class="link" id="reset">Nullstill</button>
+    </footer>
 </body>
 </html>

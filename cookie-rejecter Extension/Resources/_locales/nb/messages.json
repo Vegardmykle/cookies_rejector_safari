@@ -1,0 +1,10 @@
+{
+    "extension_name": {
+        "message": "Cookie Rejecter",
+        "description": "Navnet på utvidelsen."
+    },
+    "extension_description": {
+        "message": "Avviser automatisk alle cookies som ikke er strengt nødvendige for at nettsiden skal fungere.",
+        "description": "Beskrivelse av hva utvidelsen gjør."
+    }
+}
